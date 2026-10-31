@@ -26,8 +26,17 @@ import {
   GraduationCap,
   Clock,
   History,
+  Lock,
+  ShieldCheck,
 } from 'lucide-react';
 import { AuthUser, ClassSchedule, ProjectItem, UserRole } from '../../types';
+import {
+  sanitizeName,
+  sanitizePhone,
+  validateName,
+  validateEmail,
+  validatePhone,
+} from '../../utils/validation';
 
 export const AdminPortalView: React.FC = () => {
   const {
@@ -81,14 +90,38 @@ export const AdminPortalView: React.FC = () => {
 
   const handleCreateUser = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newUserName || !newUserEmail) return;
+
+    // 1. Strict Name validation (alphabets only)
+    const nameCheck = validateName(newUserName);
+    if (!nameCheck.isValid) {
+      addToast('error', 'Name Protection Error', nameCheck.error || 'Name can only contain alphabets and spaces.');
+      return;
+    }
+
+    // 2. Strict Email validation
+    const emailCheck = validateEmail(newUserEmail);
+    if (!emailCheck.isValid) {
+      addToast('error', 'Invalid Email', emailCheck.error || 'Please enter a valid email address.');
+      return;
+    }
+
+    // 3. Strict Phone validation (digits only)
+    if (newUserPhone.trim()) {
+      const phoneCheck = validatePhone(newUserPhone, false);
+      if (!phoneCheck.isValid) {
+        addToast('error', 'Phone Protection Error', phoneCheck.error || 'Phone must contain numerical digits only.');
+        return;
+      }
+    }
+
+    const cleanPhone = sanitizePhone(newUserPhone);
     addUser({
-      name: newUserName,
-      email: newUserEmail,
+      name: newUserName.trim(),
+      email: newUserEmail.trim(),
       role: newUserRole,
       track: newUserTrack,
       batch: newUserRole === 'student' ? newUserBatch : undefined,
-      phone: newUserPhone,
+      phone: cleanPhone || undefined,
       status: 'active',
     });
     setIsAddUserOpen(false);
@@ -407,6 +440,63 @@ export const AdminPortalView: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Code Privacy & Security Status Card */}
+            <div className="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-stone-900 font-display">
+                      Platform Source Code &amp; Developer Privacy Protection
+                    </h3>
+                    <p className="text-xs text-stone-500">
+                      Active security guards preventing non-developers and visitors from viewing, inspecting, or extracting application source code.
+                    </p>
+                  </div>
+                </div>
+                <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 self-start sm:self-auto flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                  All Shields Active
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-stone-800">Right-Click Protection</span>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-50 px-1.5 py-0.5 rounded">Enforced</span>
+                  </div>
+                  <p className="text-stone-500 text-[11px]">ContextMenu and browser inspector triggers blocked for regular visitors.</p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-stone-800">DevTools Shortcut Guard</span>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-50 px-1.5 py-0.5 rounded">Enforced</span>
+                  </div>
+                  <p className="text-stone-500 text-[11px]">F12, Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+U intercepted and restricted.</p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-stone-800">Source Map Shielding</span>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-50 px-1.5 py-0.5 rounded">Active</span>
+                  </div>
+                  <p className="text-stone-500 text-[11px]">TypeScript source maps disabled in build to prevent exposing raw code.</p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-stone-800">Role-Based Route Guard</span>
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-50 px-1.5 py-0.5 rounded">Active</span>
+                  </div>
+                  <p className="text-stone-500 text-[11px]">Portals isolated; unauthorized visitors blocked with authentication gates.</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -514,24 +604,36 @@ export const AdminPortalView: React.FC = () => {
 
                   <form onSubmit={handleCreateUser} className="space-y-3">
                     <div>
-                      <label className="block font-semibold text-stone-700 mb-1">Full Name *</label>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="block font-semibold text-stone-700">Full Name *</label>
+                        <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                          Alphabets only (A-Z)
+                        </span>
+                      </div>
                       <input
                         type="text"
                         required
                         value={newUserName}
-                        onChange={(e) => setNewUserName(e.target.value)}
+                        onChange={(e) => setNewUserName(sanitizeName(e.target.value))}
+                        pattern="[a-zA-Z\s]+"
+                        title="Only letters and spaces are allowed"
                         placeholder="e.g. Vikram Malhotra"
                         className="w-full px-3 py-2 rounded-xl border border-stone-300"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-stone-700 mb-1">Email Address *</label>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="block font-semibold text-stone-700">Email Address *</label>
+                        <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                          Strict email
+                        </span>
+                      </div>
                       <input
                         type="email"
                         required
                         value={newUserEmail}
-                        onChange={(e) => setNewUserEmail(e.target.value)}
+                        onChange={(e) => setNewUserEmail(e.target.value.trim())}
                         placeholder="vikram@example.com"
                         className="w-full px-3 py-2 rounded-xl border border-stone-300"
                       />
@@ -552,12 +654,20 @@ export const AdminPortalView: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block font-semibold text-stone-700 mb-1">Phone</label>
+                        <div className="flex items-center justify-between mb-1">
+                          <label className="block font-semibold text-stone-700">Phone</label>
+                          <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                            Digits only
+                          </span>
+                        </div>
                         <input
-                          type="text"
+                          type="tel"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          maxLength={15}
                           value={newUserPhone}
-                          onChange={(e) => setNewUserPhone(e.target.value)}
-                          placeholder="+91..."
+                          onChange={(e) => setNewUserPhone(sanitizePhone(e.target.value))}
+                          placeholder="9876543210 (10 digits)"
                           className="w-full px-3 py-2 rounded-xl border border-stone-300"
                         />
                       </div>
@@ -570,10 +680,18 @@ export const AdminPortalView: React.FC = () => {
                         onChange={(e) => setNewUserTrack(e.target.value)}
                         className="w-full px-3 py-2 rounded-xl border border-stone-300 bg-white"
                       >
-                        <option>Full-Stack Web Development</option>
-                        <option>Data Analytics & BI</option>
-                        <option>Placement Preparation & Interview Mastery</option>
-                        <option>Python Programming & AI Essentials</option>
+                        <optgroup label="🌟 Junior Foundation Academy">
+                          <option>Vedic Maths & Speed Mental Arithmetic</option>
+                          <option>English Mastery: Grammar, Spoken Fluency & Writing</option>
+                          <option>Hindi Vyakaran, Sahitya & Conversational Fluency</option>
+                          <option>Young Coders: Scratch & Creative Python</option>
+                        </optgroup>
+                        <optgroup label="💼 Career & Technical Specializations">
+                          <option>Full-Stack Web Development</option>
+                          <option>Data Analytics & BI</option>
+                          <option>Placement Preparation & Interview Mastery</option>
+                          <option>Python Programming & AI Essentials</option>
+                        </optgroup>
                       </select>
                     </div>
 
@@ -719,10 +837,18 @@ export const AdminPortalView: React.FC = () => {
                           onChange={(e) => setClsTrack(e.target.value)}
                           className="w-full px-3 py-2 rounded-xl border border-stone-300 bg-white"
                         >
-                          <option>Full-Stack Web Development</option>
-                          <option>Data Analytics & BI</option>
-                          <option>Placement Preparation & Interview Mastery</option>
-                          <option>Python Programming & AI Essentials</option>
+                          <optgroup label="🌟 Junior Foundation Academy">
+                            <option>Vedic Maths & Speed Mental Arithmetic</option>
+                            <option>English Mastery: Grammar, Spoken Fluency & Writing</option>
+                            <option>Hindi Vyakaran, Sahitya & Conversational Fluency</option>
+                            <option>Young Coders: Scratch & Creative Python</option>
+                          </optgroup>
+                          <optgroup label="💼 Career & Technical Specializations">
+                            <option>Full-Stack Web Development</option>
+                            <option>Data Analytics & BI</option>
+                            <option>Placement Preparation & Interview Mastery</option>
+                            <option>Python Programming & AI Essentials</option>
+                          </optgroup>
                         </select>
                       </div>
 
@@ -1042,10 +1168,18 @@ export const AdminPortalView: React.FC = () => {
                         onChange={(e) => setProjTrack(e.target.value)}
                         className="w-full px-3 py-2 rounded-xl border border-stone-300 bg-white"
                       >
-                        <option>Full-Stack Web Development</option>
-                        <option>Data Analytics & BI</option>
-                        <option>Placement Preparation & Interview Mastery</option>
-                        <option>Python Programming & AI Essentials</option>
+                        <optgroup label="🌟 Junior Foundation Academy">
+                          <option>Vedic Maths & Speed Mental Arithmetic</option>
+                          <option>English Mastery: Grammar, Spoken Fluency & Writing</option>
+                          <option>Hindi Vyakaran, Sahitya & Conversational Fluency</option>
+                          <option>Young Coders: Scratch & Creative Python</option>
+                        </optgroup>
+                        <optgroup label="💼 Career & Technical Specializations">
+                          <option>Full-Stack Web Development</option>
+                          <option>Data Analytics & BI</option>
+                          <option>Placement Preparation & Interview Mastery</option>
+                          <option>Python Programming & AI Essentials</option>
+                        </optgroup>
                       </select>
                     </div>
 
@@ -1230,10 +1364,18 @@ export const AdminPortalView: React.FC = () => {
                         onChange={(e) => setPptTrack(e.target.value)}
                         className="w-full px-3 py-2 rounded-xl border border-stone-300 bg-white"
                       >
-                        <option>Full-Stack Web Development</option>
-                        <option>Data Analytics & BI</option>
-                        <option>Placement Preparation & Interview Mastery</option>
-                        <option>Python Programming & AI Essentials</option>
+                        <optgroup label="🌟 Junior Foundation Academy">
+                          <option>Vedic Maths & Speed Mental Arithmetic</option>
+                          <option>English Mastery: Grammar, Spoken Fluency & Writing</option>
+                          <option>Hindi Vyakaran, Sahitya & Conversational Fluency</option>
+                          <option>Young Coders: Scratch & Creative Python</option>
+                        </optgroup>
+                        <optgroup label="💼 Career & Technical Specializations">
+                          <option>Full-Stack Web Development</option>
+                          <option>Data Analytics & BI</option>
+                          <option>Placement Preparation & Interview Mastery</option>
+                          <option>Python Programming & AI Essentials</option>
+                        </optgroup>
                       </select>
                     </div>
 

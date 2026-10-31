@@ -676,10 +676,18 @@ export const MentorPortalView: React.FC = () => {
                           onChange={(e) => setPptTrack(e.target.value)}
                           className="w-full px-3 py-2 rounded-xl border border-stone-300 bg-white"
                         >
-                          <option>Full-Stack Web Development</option>
-                          <option>Data Analytics & BI</option>
-                          <option>Placement Preparation & Interview Mastery</option>
-                          <option>Python Programming & AI Essentials</option>
+                          <optgroup label="🌟 Junior Foundation Academy">
+                            <option>Vedic Maths & Speed Mental Arithmetic</option>
+                            <option>English Mastery: Grammar, Spoken Fluency & Writing</option>
+                            <option>Hindi Vyakaran, Sahitya & Conversational Fluency</option>
+                            <option>Young Coders: Scratch & Creative Python</option>
+                          </optgroup>
+                          <optgroup label="💼 Career & Technical Specializations">
+                            <option>Full-Stack Web Development</option>
+                            <option>Data Analytics & BI</option>
+                            <option>Placement Preparation & Interview Mastery</option>
+                            <option>Python Programming & AI Essentials</option>
+                          </optgroup>
                         </select>
                       </div>
 

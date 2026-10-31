@@ -14,6 +14,8 @@ import { LoginView } from './views/LoginView';
 import { StudentPortalView } from './views/portals/StudentPortalView';
 import { MentorPortalView } from './views/portals/MentorPortalView';
 import { AdminPortalView } from './views/portals/AdminPortalView';
+import { PrivacyProtectionShield } from './components/PrivacyProtectionShield';
+import { ShieldAlert } from 'lucide-react';
 import {
   PrivacyPolicyView,
   TermsView,
@@ -21,8 +23,31 @@ import {
   CodeOfConductView,
 } from './views/PolicyViews';
 
+const AccessRestrictedView: React.FC<{ requiredRole: string }> = ({ requiredRole }) => {
+  const { navigateTo } = useApp();
+  return (
+    <div className="w-full py-20 px-4 flex items-center justify-center min-h-[60vh]">
+      <div className="max-w-md w-full bg-white p-8 rounded-3xl border border-stone-200 text-center space-y-4 shadow-xs">
+        <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+          <ShieldAlert className="w-6 h-6" />
+        </div>
+        <h2 className="text-xl font-bold text-stone-900 font-display">Access Restricted &amp; Protected</h2>
+        <p className="text-xs text-stone-500">
+          This workspace contains protected Code Mux engineering resources. Only authorized {requiredRole}s may access this view.
+        </p>
+        <button
+          onClick={() => navigateTo('login')}
+          className="w-full py-2.5 px-4 bg-[#FF6B16] text-white text-xs font-bold rounded-xl hover:bg-orange-600 transition-colors cursor-pointer shadow-xs"
+        >
+          Authenticate as {requiredRole}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const AppContent: React.FC = () => {
-  const { currentPage } = useApp();
+  const { currentPage, currentUser } = useApp();
 
   const renderCurrentView = () => {
     switch (currentPage) {
@@ -39,10 +64,19 @@ const AppContent: React.FC = () => {
       case 'login':
         return <LoginView />;
       case 'student-portal':
+        if (!currentUser) {
+          return <AccessRestrictedView requiredRole="Student" />;
+        }
         return <StudentPortalView />;
       case 'mentor-portal':
+        if (!currentUser || (currentUser.role !== 'mentor' && currentUser.role !== 'admin')) {
+          return <AccessRestrictedView requiredRole="Mentor / Faculty" />;
+        }
         return <MentorPortalView />;
       case 'admin-portal':
+        if (!currentUser || currentUser.role !== 'admin') {
+          return <AccessRestrictedView requiredRole="System Administrator" />;
+        }
         return <AdminPortalView />;
       case 'privacy':
         return <PrivacyPolicyView />;
@@ -65,9 +99,10 @@ const AppContent: React.FC = () => {
       </main>
       <Footer />
 
-      {/* Global Interactive Modal */}
+      {/* Global Interactive Modal & Security Guard */}
       <EarlyAccessModal />
       <ToastContainer />
+      <PrivacyProtectionShield />
     </div>
   );
 };

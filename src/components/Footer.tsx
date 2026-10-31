@@ -28,11 +28,11 @@ export const Footer: React.FC = () => {
             </div>
 
             <p className="text-sm leading-relaxed max-w-sm text-stone-600">
-              Code Mux is an Indian technology education and career preparation initiative. We help students develop practical coding skills through structured learning, hands-on projects, and career readiness guidance.
+              Code Mux is an Indian education platform delivering foundational academic mastery in Vedic Maths, English, Hindi, and Young Coding, alongside practical project-centered career programs for college students and graduates.
             </p>
 
             <div className="text-xs text-stone-500 pt-1">
-              <strong className="text-stone-700">Tagline:</strong> Learn Skills. Build Projects. Get Career-Ready.
+              <strong className="text-stone-700">Mission:</strong> Foundational Mastery &amp; Real-World Career Skills.
             </div>
 
             <div className="pt-2 text-xs text-stone-500 space-y-1.5">
@@ -50,9 +50,44 @@ export const Footer: React.FC = () => {
           {/* Column 2: Focus Areas */}
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-stone-900 uppercase tracking-wider">
-              Focus Domains
+              Learning Tracks
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 text-xs">
+              <li className="text-[10px] font-bold text-[#FF6B16] uppercase pt-0.5">Junior Foundation Academy</li>
+              <li>
+                <button
+                  onClick={() => handleLink('domains')}
+                  className="hover:text-stone-900 transition-colors text-left cursor-pointer"
+                >
+                  Vedic Maths &amp; Mental Speed
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleLink('domains')}
+                  className="hover:text-stone-900 transition-colors text-left cursor-pointer"
+                >
+                  English Mastery &amp; Public Speaking
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleLink('domains')}
+                  className="hover:text-stone-900 transition-colors text-left cursor-pointer"
+                >
+                  Hindi Vyakaran &amp; Sahitya
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleLink('domains')}
+                  className="hover:text-stone-900 transition-colors text-left cursor-pointer"
+                >
+                  Young Coders (Scratch &amp; Python)
+                </button>
+              </li>
+
+              <li className="text-[10px] font-bold text-[#FF6B16] uppercase pt-2">Career Specializations</li>
               <li>
                 <button
                   onClick={() => handleLink('domains')}
@@ -66,23 +101,7 @@ export const Footer: React.FC = () => {
                   onClick={() => handleLink('domains')}
                   className="hover:text-stone-900 transition-colors text-left cursor-pointer"
                 >
-                  Data Analytics &amp; BI
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLink('domains')}
-                  className="hover:text-stone-900 transition-colors text-left cursor-pointer"
-                >
-                  Python &amp; AI Fundamentals
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLink('domains')}
-                  className="hover:text-stone-900 transition-colors text-left cursor-pointer"
-                >
-                  Placement Preparation
+                  Data Analytics &amp; Python AI
                 </button>
               </li>
               <li>

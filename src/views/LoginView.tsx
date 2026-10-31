@@ -15,6 +15,16 @@ import {
   CheckCircle2,
   Sparkles,
 } from 'lucide-react';
+import { COUNTRY_CODES } from '../data/countryCodes';
+import {
+  sanitizeName,
+  sanitizePhone,
+  sanitizeAge,
+  validateName,
+  validatePhone,
+  validateEmail,
+  validatePassword,
+} from '../utils/validation';
 
 export const LoginView: React.FC = () => {
   const { loginUser, registerUser, addToast, navigateTo } = useApp();
@@ -32,30 +42,85 @@ export const LoginView: React.FC = () => {
   const [regName, setRegName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
-  const [regInterest, setRegInterest] = useState('Full-Stack Web Development');
+  const [regAge, setRegAge] = useState<number | ''>(10);
+  const [regInterest, setRegInterest] = useState('Vedic Maths & Speed Mental Arithmetic');
+  const [regCountryCode, setRegCountryCode] = useState('+91');
   const [regPhone, setRegPhone] = useState('');
   const [regConsent, setRegConsent] = useState(true);
 
+  const handleAgeChange = (val: string) => {
+    const sanitized = sanitizeAge(val);
+    setRegAge(sanitized);
+    if (typeof sanitized === 'number') {
+      if (sanitized < 18) {
+        if (!['Vedic Maths & Speed Mental Arithmetic', 'English Mastery: Grammar, Spoken Fluency & Writing', 'Hindi Vyakaran, Sahitya & Conversational Fluency', 'Young Coders: Scratch & Creative Python'].includes(regInterest)) {
+          setRegInterest('Vedic Maths & Speed Mental Arithmetic');
+        }
+      } else {
+        if (!['Full-Stack Web Development', 'Data Analytics & Business Intelligence', 'Python Programming & AI Fundamentals', 'Placement Preparation & Career Readiness'].includes(regInterest)) {
+          setRegInterest('Full-Stack Web Development');
+        }
+      }
+    }
+  };
+
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      addToast('error', 'Missing Information', 'Please enter both your email address and password.');
+    const emailCheck = validateEmail(email);
+    if (!emailCheck.isValid) {
+      addToast('error', 'Invalid Email', emailCheck.error || 'Please enter a valid email address.');
       return;
     }
-    loginUser(email, selectedRole);
+    const passCheck = validatePassword(password);
+    if (!passCheck.isValid) {
+      addToast('error', 'Invalid Password', passCheck.error || 'Password must be at least 6 characters long.');
+      return;
+    }
+    loginUser(email.trim(), selectedRole);
   };
 
   const handleRegisterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!regName || !regEmail || !regPassword) {
-      addToast('error', 'Missing Information', 'Please provide your full name, email, and password.');
+
+    // 1. Strict Name validation (alphabets only)
+    const nameCheck = validateName(regName);
+    if (!nameCheck.isValid) {
+      addToast('error', 'Name Protection Error', nameCheck.error || 'Name must contain only alphabets and spaces (no numbers or special characters).');
       return;
     }
+
+    // 2. Strict Email validation
+    const emailCheck = validateEmail(regEmail);
+    if (!emailCheck.isValid) {
+      addToast('error', 'Invalid Email', emailCheck.error || 'Please enter a valid email address.');
+      return;
+    }
+
+    // 3. Strict Phone validation (digits only)
+    if (regPhone.trim()) {
+      const phoneCheck = validatePhone(regPhone, false);
+      if (!phoneCheck.isValid) {
+        addToast('error', 'Phone Protection Error', phoneCheck.error || 'Phone number must contain numerical digits only.');
+        return;
+      }
+    }
+
+    // 4. Strict Password validation
+    const passCheck = validatePassword(regPassword);
+    if (!passCheck.isValid) {
+      addToast('error', 'Password Protection', passCheck.error || 'Password must be at least 6 characters long.');
+      return;
+    }
+
+    // 5. Consent check
     if (!regConsent) {
       addToast('error', 'Consent Required', 'Please accept the Code Mux terms of service to continue.');
       return;
     }
-    registerUser(regName, regEmail, regInterest, regPhone);
+
+    const cleanPhoneDigits = sanitizePhone(regPhone);
+    const fullPhone = cleanPhoneDigits ? `${regCountryCode} ${cleanPhoneDigits}` : '';
+    registerUser(regName.trim(), regEmail.trim(), regInterest, fullPhone);
   };
 
   const handleQuickDemoLogin = (role: UserRole) => {
@@ -64,7 +129,7 @@ export const LoginView: React.FC = () => {
     } else if (role === 'mentor') {
       loginUser('mentor@codemux.in', 'mentor', 'Senior Mentor');
     } else {
-      loginUser('student@codemux.in', 'student', 'Rahul Sharma');
+      loginUser('xyz@gmail.com', 'student', 'Vinit Sharma');
     }
   };
 
@@ -297,16 +362,45 @@ export const LoginView: React.FC = () => {
           /* REGISTRATION FORM */
           <form onSubmit={handleRegisterSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                Full Name
-              </label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-semibold text-stone-700">
+                  Full Name
+                </label>
+                <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-2 py-0.5 rounded-md">
+                  Alphabets only (A-Z)
+                </span>
+              </div>
               <div className="relative">
                 <User className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
                 <input
                   type="text"
                   value={regName}
-                  onChange={(e) => setRegName(e.target.value)}
-                  placeholder="e.g. Rahul Sharma"
+                  onChange={(e) => setRegName(sanitizeName(e.target.value))}
+                  placeholder="e.g. Vinit Sharma"
+                  required
+                  pattern="[a-zA-Z\s]+"
+                  title="Only letters and spaces are allowed"
+                  className="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-semibold text-stone-700">
+                  Email Address
+                </label>
+                <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-2 py-0.5 rounded-md">
+                  Strict email format
+                </span>
+              </div>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
+                <input
+                  type="email"
+                  value={regEmail}
+                  onChange={(e) => setRegEmail(e.target.value.trim())}
+                  placeholder="xyz@gmail.com"
                   required
                   className="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
                 />
@@ -314,54 +408,167 @@ export const LoginView: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
-                <input
-                  type="email"
-                  value={regEmail}
-                  onChange={(e) => setRegEmail(e.target.value)}
-                  placeholder="rahul@college.edu"
-                  required
-                  className="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                  Phone (Optional)
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-semibold text-stone-700">
+                  Phone Number (Optional)
                 </label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-2.5 w-4 h-4 text-stone-400" />
+                <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-2 py-0.5 rounded-md">
+                  Digits only (0-9)
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-36 sm:w-44 shrink-0">
+                  <select
+                    value={regCountryCode}
+                    onChange={(e) => setRegCountryCode(e.target.value)}
+                    aria-label="Country phone code"
+                    className="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl px-2.5 py-2.5 text-xs text-stone-900 focus:outline-none focus:border-[#FF6B16] font-medium"
+                  >
+                    {COUNTRY_CODES.map((c) => (
+                      <option key={`${c.code}-${c.dialCode}`} value={c.dialCode}>
+                        {c.flag} {c.dialCode} ({c.name})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="relative flex-1">
+                  <Phone className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
                   <input
                     type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={15}
                     value={regPhone}
-                    onChange={(e) => setRegPhone(e.target.value)}
-                    placeholder="+91 98765..."
-                    className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-[#FF6B16]"
+                    onChange={(e) => setRegPhone(sanitizePhone(e.target.value))}
+                    placeholder="9876543210 (10 digits)"
+                    className="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-stone-900 focus:outline-none focus:border-[#FF6B16]"
                   />
                 </div>
               </div>
+            </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                  Area of Interest
+            {/* Ask Age First */}
+            <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-orange-200/90 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-bold text-stone-800">
+                  1. Learner Age <span className="text-[#FF6B16]">*</span>
                 </label>
-                <select
-                  value={regInterest}
-                  onChange={(e) => setRegInterest(e.target.value)}
-                  className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-2.5 py-2 text-xs text-stone-900 focus:outline-none focus:border-[#FF6B16]"
-                >
-                  <option value="Full-Stack Web Development">Web Development</option>
-                  <option value="Data Analytics & BI">Data Analytics</option>
-                  <option value="Python & AI Fundamentals">Python &amp; AI</option>
-                  <option value="Placement Preparation">Placement Prep</option>
-                </select>
+                <span className="text-[11px] text-stone-500">
+                  Select age to reveal relatable domains
+                </span>
               </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min="5"
+                  max="80"
+                  value={regAge}
+                  onChange={(e) => handleAgeChange(e.target.value)}
+                  placeholder="e.g. 10 or 21"
+                  required
+                  className="w-24 bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs sm:text-sm font-bold text-stone-900 focus:outline-none focus:border-[#FF6B16]"
+                />
+                <div className="flex flex-wrap items-center gap-1.5 flex-1">
+                  {[7, 10, 13, 16, 18, 21].map((a) => (
+                    <button
+                      key={a}
+                      type="button"
+                      onClick={() => handleAgeChange(a.toString())}
+                      className={`px-2.5 py-1 text-xs rounded-lg font-semibold transition-all cursor-pointer ${
+                        regAge === a
+                          ? 'bg-[#FF6B16] text-white shadow-xs'
+                          : 'bg-white text-stone-700 border border-stone-200 hover:border-orange-300'
+                      }`}
+                    >
+                      {a} yrs
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {typeof regAge === 'number' && (
+                <div className="text-[11px] text-[#FF6B16] font-semibold flex items-center gap-1.5 pt-0.5">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                  <span>
+                    Showing relatable domains for age {regAge}:{' '}
+                    <strong>{regAge < 18 ? 'Junior Foundation Academy' : 'Career & Tech Specializations'}</strong>
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Relatable Track Dropdown */}
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1.5">
+                2. Relatable Learning Track
+              </label>
+              <select
+                value={regInterest}
+                onChange={(e) => setRegInterest(e.target.value)}
+                className="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-stone-900 focus:outline-none focus:border-[#FF6B16] font-medium"
+              >
+                {typeof regAge === 'number' && regAge < 18 ? (
+                  <optgroup label="🌟 Junior Foundation Tracks">
+                    <option value="Vedic Maths & Speed Mental Arithmetic">
+                      Vedic Maths &amp; Speed Mental Arithmetic
+                    </option>
+                    <option value="English Mastery: Grammar, Spoken Fluency & Writing">
+                      English Mastery: Grammar, Spoken Fluency &amp; Writing
+                    </option>
+                    <option value="Hindi Vyakaran, Sahitya & Conversational Fluency">
+                      Hindi Vyakaran, Sahitya &amp; Conversational Fluency
+                    </option>
+                    <option value="Young Coders: Scratch & Creative Python">
+                      Young Coders: Scratch &amp; Creative Python
+                    </option>
+                  </optgroup>
+                ) : typeof regAge === 'number' && regAge >= 18 ? (
+                  <optgroup label="💼 Career & Technical Specializations">
+                    <option value="Full-Stack Web Development">
+                      Full-Stack Web Development
+                    </option>
+                    <option value="Data Analytics & Business Intelligence">
+                      Data Analytics &amp; Business Intelligence
+                    </option>
+                    <option value="Python Programming & AI Fundamentals">
+                      Python Programming &amp; AI Fundamentals
+                    </option>
+                    <option value="Placement Preparation & Career Readiness">
+                      Placement Preparation &amp; Career Readiness
+                    </option>
+                  </optgroup>
+                ) : (
+                  <>
+                    <optgroup label="🌟 Junior Foundation Tracks">
+                      <option value="Vedic Maths & Speed Mental Arithmetic">
+                        Vedic Maths &amp; Speed Mental Arithmetic
+                      </option>
+                      <option value="English Mastery: Grammar, Spoken Fluency & Writing">
+                        English Mastery: Grammar, Spoken Fluency &amp; Writing
+                      </option>
+                      <option value="Hindi Vyakaran, Sahitya & Conversational Fluency">
+                        Hindi Vyakaran, Sahitya &amp; Conversational Fluency
+                      </option>
+                      <option value="Young Coders: Scratch & Creative Python">
+                        Young Coders: Scratch &amp; Creative Python
+                      </option>
+                    </optgroup>
+                    <optgroup label="💼 Career & Technical Specializations">
+                      <option value="Full-Stack Web Development">
+                        Full-Stack Web Development
+                      </option>
+                      <option value="Data Analytics & Business Intelligence">
+                        Data Analytics &amp; Business Intelligence
+                      </option>
+                      <option value="Python Programming & AI Fundamentals">
+                        Python Programming &amp; AI Fundamentals
+                      </option>
+                      <option value="Placement Preparation & Career Readiness">
+                        Placement Preparation &amp; Career Readiness
+                      </option>
+                    </optgroup>
+                  </>
+                )}
+              </select>
             </div>
 
             <div>

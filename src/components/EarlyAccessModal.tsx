@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { X, Mail, User, Phone, ArrowRight, Sparkles } from 'lucide-react';
+import { COUNTRY_CODES } from '../data/countryCodes';
+import {
+  sanitizeName,
+  sanitizePhone,
+  validateName,
+  validatePhone,
+  validateEmail,
+} from '../utils/validation';
 
 export const EarlyAccessModal: React.FC = () => {
   const {
@@ -8,19 +16,51 @@ export const EarlyAccessModal: React.FC = () => {
     closeEarlyAccessModal,
     joinEarlyAccess,
     modalDefaultInterest,
+    addToast,
   } = useApp();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [learnerAge, setLearnerAge] = useState<string>('');
   const [interest, setInterest] = useState(modalDefaultInterest);
+  const [countryCode, setCountryCode] = useState('+91');
   const [phone, setPhone] = useState('');
+
+  const numericAge = parseInt(learnerAge, 10);
+  const hasAge = !isNaN(numericAge) && numericAge > 0;
 
   if (!isEarlyAccessModalOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email) return;
-    joinEarlyAccess(name, email, interest, phone);
+
+    // 1. Strict Name validation (alphabets only)
+    const nameCheck = validateName(name);
+    if (!nameCheck.isValid) {
+      addToast('error', 'Name Protection Error', nameCheck.error || 'Name can only contain alphabets and spaces.');
+      return;
+    }
+
+    // 2. Strict Email validation
+    const emailCheck = validateEmail(email);
+    if (!emailCheck.isValid) {
+      addToast('error', 'Invalid Email', emailCheck.error || 'Please enter a valid email address.');
+      return;
+    }
+
+    // 3. Strict Phone validation (digits only)
+    if (phone.trim()) {
+      const phoneCheck = validatePhone(phone, false);
+      if (!phoneCheck.isValid) {
+        addToast('error', 'Phone Protection Error', phoneCheck.error || 'Phone number must contain numerical digits only.');
+        return;
+      }
+    }
+
+    const cleanPhoneDigits = sanitizePhone(phone);
+    const fullPhone = cleanPhoneDigits ? `${countryCode} ${cleanPhoneDigits}` : '';
+    const ageNote = hasAge ? ` [Age: ${numericAge}]` : '';
+    joinEarlyAccess(name.trim(), email.trim(), `${interest}${ageNote}`, fullPhone);
   };
 
   return (
@@ -50,51 +90,161 @@ export const EarlyAccessModal: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Ask Age First */}
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">
-              Area of Interest
-            </label>
-            <select
-              value={interest}
-              onChange={(e) => setInterest(e.target.value)}
-              className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-[#FF6B16]"
-            >
-              <option value="Full-Stack Web Development">Full-Stack Web Development</option>
-              <option value="Data Analytics & BI">Data Analytics &amp; BI</option>
-              <option value="Python & AI Fundamentals">Python &amp; AI Fundamentals</option>
-              <option value="Placement Preparation & Interview Mastery">Placement Preparation</option>
-              <option value="All Programs">All Programs</option>
-            </select>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold text-stone-700">
+                Learner's Age (Optional)
+              </label>
+              <span className="text-[10px] text-[#FF6B16] font-medium">
+                {hasAge && (numericAge < 18 ? 'Foundation Tracks Filtered' : 'Career Tracks Filtered')}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                min="5"
+                max="80"
+                value={learnerAge}
+                onChange={(e) => setLearnerAge(e.target.value)}
+                placeholder="Enter age (e.g. 10 or 21)..."
+                className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
+              />
+              <div className="flex items-center gap-1 shrink-0">
+                {[8, 12, 16, 18, 21].map((a) => (
+                  <button
+                    key={a}
+                    type="button"
+                    onClick={() => setLearnerAge(a.toString())}
+                    className={`px-2 py-1 text-[11px] rounded font-semibold transition-all cursor-pointer ${
+                      numericAge === a
+                        ? 'bg-[#FF6B16] text-white'
+                        : 'bg-stone-100 text-stone-700 hover:bg-orange-50'
+                    }`}
+                  >
+                    {a}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div>
             <label className="block text-xs font-semibold text-stone-700 mb-1">
-              Your Full Name
+              Relatable Area of Interest
             </label>
+            <select
+              value={interest}
+              onChange={(e) => setInterest(e.target.value)}
+              className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-[#FF6B16] font-medium"
+            >
+              <option value="All Programs">All Programs &amp; Announcements</option>
+
+              {hasAge && numericAge < 18 ? (
+                <optgroup label="🌟 Junior Foundation Tracks">
+                  <option value="Vedic Maths & Speed Mental Arithmetic">
+                    Vedic Maths &amp; Speed Mental Arithmetic
+                  </option>
+                  <option value="English Mastery: Grammar, Spoken Fluency & Writing">
+                    English Mastery: Grammar, Spoken Fluency &amp; Writing
+                  </option>
+                  <option value="Hindi Vyakaran, Sahitya & Conversational Fluency">
+                    Hindi Vyakaran, Sahitya &amp; Conversational Fluency
+                  </option>
+                  <option value="Young Coders: Scratch & Creative Python">
+                    Young Coders: Scratch &amp; Creative Python
+                  </option>
+                </optgroup>
+              ) : hasAge && numericAge >= 18 ? (
+                <optgroup label="💼 Career & Technical Specializations">
+                  <option value="Full-Stack Web Development">
+                    Full-Stack Web Development
+                  </option>
+                  <option value="Data Analytics & BI">
+                    Data Analytics &amp; BI
+                  </option>
+                  <option value="Python Programming & AI Fundamentals">
+                    Python Programming &amp; AI Fundamentals
+                  </option>
+                  <option value="Placement Preparation & Interview Mastery">
+                    Placement Preparation &amp; Interview Mastery
+                  </option>
+                </optgroup>
+              ) : (
+                <>
+                  <optgroup label="🌟 Junior Foundation Tracks">
+                    <option value="Vedic Maths & Speed Mental Arithmetic">
+                      Vedic Maths &amp; Speed Mental Arithmetic
+                    </option>
+                    <option value="English Mastery: Grammar, Spoken Fluency & Writing">
+                      English Mastery: Grammar, Spoken Fluency &amp; Writing
+                    </option>
+                    <option value="Hindi Vyakaran, Sahitya & Conversational Fluency">
+                      Hindi Vyakaran, Sahitya &amp; Conversational Fluency
+                    </option>
+                    <option value="Young Coders: Scratch & Creative Python">
+                      Young Coders: Scratch &amp; Creative Python
+                    </option>
+                  </optgroup>
+                  <optgroup label="💼 Career & Technical Specializations">
+                    <option value="Full-Stack Web Development">
+                      Full-Stack Web Development
+                    </option>
+                    <option value="Data Analytics & BI">
+                      Data Analytics &amp; BI
+                    </option>
+                    <option value="Python Programming & AI Fundamentals">
+                      Python Programming &amp; AI Fundamentals
+                    </option>
+                    <option value="Placement Preparation & Interview Mastery">
+                      Placement Preparation &amp; Interview Mastery
+                    </option>
+                  </optgroup>
+                </>
+              )}
+            </select>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold text-stone-700">
+                Your Full Name
+              </label>
+              <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                Alphabets only (A-Z)
+              </span>
+            </div>
             <div className="relative">
               <User className="absolute left-3 top-2.5 w-4 h-4 text-stone-400" />
               <input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Rahul Sharma"
+                onChange={(e) => setName(sanitizeName(e.target.value))}
+                placeholder="e.g. Vinit Sharma"
                 required
+                pattern="[a-zA-Z\s]+"
+                title="Only letters and spaces are allowed"
                 className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">
-              Email Address
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold text-stone-700">
+                Email Address
+              </label>
+              <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                Strict email
+              </span>
+            </div>
             <div className="relative">
               <Mail className="absolute left-3 top-2.5 w-4 h-4 text-stone-400" />
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="rahul@example.com"
+                onChange={(e) => setEmail(e.target.value.trim())}
+                placeholder="xyz@gmail.com"
                 required
                 className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
               />
@@ -102,18 +252,42 @@ export const EarlyAccessModal: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">
-              WhatsApp / Phone (Optional)
-            </label>
-            <div className="relative">
-              <Phone className="absolute left-3 top-2.5 w-4 h-4 text-stone-400" />
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="+91 98765 43210"
-                className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
-              />
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold text-stone-700">
+                WhatsApp / Phone Number (Optional)
+              </label>
+              <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                Digits only (0-9)
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-32 shrink-0">
+                <select
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                  aria-label="Country phone code"
+                  className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-2 py-2 text-xs text-stone-900 focus:outline-none focus:border-[#FF6B16] font-medium"
+                >
+                  {COUNTRY_CODES.map((c) => (
+                    <option key={`${c.code}-${c.dialCode}`} value={c.dialCode}>
+                      {c.flag} {c.dialCode} ({c.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="relative flex-1">
+                <Phone className="absolute left-3 top-2.5 w-4 h-4 text-stone-400" />
+                <input
+                  type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={15}
+                  value={phone}
+                  onChange={(e) => setPhone(sanitizePhone(e.target.value))}
+                  placeholder="9876543210 (10 digits)"
+                  className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg pl-9 pr-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
+                />
+              </div>
             </div>
           </div>
 

@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { Mail, Clock, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Clock, MapPin, Send, CheckCircle2, Phone } from 'lucide-react';
+import {
+  sanitizeName,
+  sanitizePhone,
+  validateName,
+  validateEmail,
+  validatePhone,
+} from '../utils/validation';
 
 export const ContactView: React.FC = () => {
   const { submitContactForm, addToast } = useApp();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState('');
   const [interest, setInterest] = useState('Full-Stack Web Development');
   const [message, setMessage] = useState('');
@@ -15,21 +23,52 @@ export const ContactView: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) {
-      addToast('error', 'Missing Information', 'Please provide your full name, email address, and inquiry message.');
+
+    // 1. Strict Name validation (alphabets only)
+    const nameCheck = validateName(name);
+    if (!nameCheck.isValid) {
+      addToast('error', 'Name Protection Error', nameCheck.error || 'Name must contain only alphabets and spaces.');
       return;
     }
+
+    // 2. Strict Email validation
+    const emailCheck = validateEmail(email);
+    if (!emailCheck.isValid) {
+      addToast('error', 'Invalid Email', emailCheck.error || 'Please enter a valid email address.');
+      return;
+    }
+
+    // 3. Strict Phone validation (digits only)
+    if (phone.trim()) {
+      const phoneCheck = validatePhone(phone, false);
+      if (!phoneCheck.isValid) {
+        addToast('error', 'Phone Protection Error', phoneCheck.error || 'Phone number must contain numerical digits only.');
+        return;
+      }
+    }
+
+    if (!message.trim()) {
+      addToast('error', 'Missing Information', 'Please provide your inquiry message.');
+      return;
+    }
+
     if (!consent) {
       addToast('error', 'Consent Required', 'Please acknowledge the privacy consent notice to send your enquiry.');
       return;
     }
 
+    const cleanPhone = sanitizePhone(phone);
+    const resolvedSubject = subject.trim() || `Course Inquiry: ${interest}`;
+    const fullMessage = cleanPhone
+      ? `${message.trim()}\n\n[Contact Phone: ${cleanPhone}]`
+      : message.trim();
+
     submitContactForm({
-      name,
-      email,
-      subject: subject || `Course Inquiry: ${interest}`,
+      name: name.trim(),
+      email: email.trim(),
+      subject: resolvedSubject,
       interest,
-      message,
+      message: fullMessage,
     });
 
     setSubmitted(true);
@@ -135,35 +174,71 @@ export const ContactView: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                        Your Full Name
-                      </label>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs font-semibold text-stone-700">
+                          Your Full Name
+                        </label>
+                        <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                          Alphabets only (A-Z)
+                        </span>
+                      </div>
                       <input
                         type="text"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="e.g. Aarav Sharma"
+                        onChange={(e) => setName(sanitizeName(e.target.value))}
+                        placeholder="e.g. Vinit Sharma"
                         required
+                        pattern="[a-zA-Z\s]+"
+                        title="Only letters and spaces are allowed"
                         className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-3 py-2 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                        Email Address
-                      </label>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs font-semibold text-stone-700">
+                          Email Address
+                        </label>
+                        <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                          Strict email
+                        </span>
+                      </div>
                       <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="aarav@example.com"
+                        onChange={(e) => setEmail(e.target.value.trim())}
+                        placeholder="xyz@gmail.com"
                         required
                         className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg px-3 py-2 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs font-semibold text-stone-700">
+                          Phone / WhatsApp
+                        </label>
+                        <span className="text-[10px] text-stone-500 font-medium bg-stone-100 px-1.5 py-0.5 rounded">
+                          Digits only (0-9)
+                        </span>
+                      </div>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-2.5 w-4 h-4 text-stone-400" />
+                        <input
+                          type="tel"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          maxLength={15}
+                          value={phone}
+                          onChange={(e) => setPhone(sanitizePhone(e.target.value))}
+                          placeholder="9876543210 (10 digits)"
+                          className="w-full bg-[#FAF8F5] border border-stone-300 rounded-lg pl-9 pr-3 py-2 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-[#FF6B16]"
+                        />
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                         Program of Interest

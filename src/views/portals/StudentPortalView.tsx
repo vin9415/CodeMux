@@ -238,28 +238,23 @@ export const StudentPortalView: React.FC = () => {
         </div>
 
         {/* Track Filter selector */}
-        <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-stone-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200">
           <div className="flex items-center gap-2 text-xs text-stone-500">
             <Filter className="w-4 h-4 text-stone-400" />
-            <span>Filter Track Content:</span>
+            <span className="font-semibold text-stone-700">Filter Learning Track:</span>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              'Full-Stack Web Development',
-              'Data Analytics & BI',
-              'Placement Preparation & Interview Mastery',
-              'Python Programming & AI Essentials',
-            ].map((track) => (
+          <div className="flex flex-wrap gap-1.5">
+            {syllabusTracks.map((st) => (
               <button
-                key={track}
-                onClick={() => setSelectedTrackFilter(track)}
+                key={st.trackName}
+                onClick={() => setSelectedTrackFilter(st.trackName)}
                 className={`px-3 py-1.5 text-xs rounded-xl font-medium transition-colors cursor-pointer ${
-                  selectedTrackFilter === track
+                  selectedTrackFilter === st.trackName
                     ? 'bg-orange-100 text-[#FF6B16] border border-orange-300 font-bold'
                     : 'bg-stone-50 text-stone-600 border border-stone-200 hover:bg-stone-100'
                 }`}
               >
-                {track}
+                {st.trackName}
               </button>
             ))}
           </div>
