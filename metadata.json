@@ -1,0 +1,8 @@
+{
+  "name": "Code Mux - Technology Education & Career Platform",
+  "description": "Learn coding, web development, data analytics and DSA with Code Mux. Practical project-based training, mentor guidance, and career preparation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

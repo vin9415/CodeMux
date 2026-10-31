@@ -1,0 +1,1012 @@
+# CODE MUX — COMPLETE WEBSITE DEVELOPMENT BRIEF
+
+## 1. PROJECT OVERVIEW
+
+**Company Name:** Code Mux  
+**Industry:** EdTech, IT Training, Technical Education and Career Development  
+**Business Type:** Online technology training and placement preparation platform  
+**Primary Market:** India  
+**Website Type:** Full-stack educational website with role-based dashboards  
+**Primary Audience:** College students, fresh graduates, aspiring developers and job seekers  
+**Brand Tagline:** Learn Skills. Build Projects. Get Career-Ready.
+
+**Company Mission:** To help students develop practical technology skills through structured learning, real-world projects, mentorship and career preparation.
+
+**Company Vision:** To bridge the gap between academic education and industry requirements by connecting learning, practical experience and employment opportunities.
+
+**Brand Positioning:** Code Mux is a modern, affordable and practical technology learning platform that helps students prepare for technical careers.
+
+**Core Services:**
+- Technical training and online courses
+- Live mentor-led training batches
+- Recorded lessons and learning resources
+- Hands-on projects and assignments
+- Programming and DSA preparation
+- Resume building and interview preparation
+- Mock interviews and career guidance
+- Job listings and placement assistance
+- College workshops and corporate training in the future
+
+Important: Do not claim that Code Mux is accredited, has established employer partnerships, or guarantees jobs unless those claims have been verified.
+
+---
+
+## 2. BRAND IDENTITY
+
+Use the supplied Code Mux logo as the official brand reference. Preserve the original logo design and proportions. Do not replace it with a generic icon.
+
+### Brand Colors
+
+- Primary background: #100D0B
+- Secondary background: #19130F
+- Primary accent: #F59E0B
+- Orange highlight: #FF6B16
+- Warm cream: #FFF0D8
+- Primary text on dark backgrounds: #FFFFFF
+- Secondary text: #B8B0A8
+- Light section background: #FFF9F1
+
+Use a black and orange aesthetic with subtle amber gradients, clean cards, soft shadows, rounded corners and restrained animations.
+
+### Typography
+
+- Primary font: Inter
+- Alternative font: Poppins
+- Headings: Bold, modern and clear
+- Body text: Readable, medium-sized and accessible
+
+### Design Direction
+
+Create a modern technology startup website inspired by premium SaaS products and professional EdTech platforms.
+
+The website should feel:
+- Professional
+- Modern
+- Minimal
+- Student-friendly
+- Trustworthy
+- Career-oriented
+- Mobile-responsive
+
+Avoid excessive animations, cluttered layouts, too many gradients, unnecessary popups and fake statistics.
+
+---
+
+## 3. WEBSITE GOALS
+
+The website must:
+
+1. Attract prospective students through SEO and educational content.
+2. Explain Code Mux courses and training programs.
+3. Convert visitors into registrations and course inquiries.
+4. Allow students to register, enroll and access learning resources.
+5. Allow mentors to manage assigned courses and students.
+6. Allow administrators to manage the platform.
+7. Provide a structured placement preparation and job application system.
+8. Display real student projects and verified outcomes as the business grows.
+9. Support future payments, certificates and employer partnerships.
+10. Be easy to maintain and affordable for an early-stage startup.
+
+---
+
+## 4. WEBSITE NAVIGATION
+
+### Public Navigation Bar
+
+- Home
+- Courses
+- Career & Placements
+- Projects
+- About Us
+- Contact
+- Login
+- Get Started
+
+Use the Code Mux logo on the left and the primary CTA button on the right.
+
+On mobile, use a clean collapsible navigation menu.
+
+### Footer Navigation
+
+- About Code Mux
+- Courses
+- Career & Placements
+- Contact Us
+- FAQs
+- Privacy Policy
+- Terms and Conditions
+- Refund and Cancellation Policy
+- Social media links
+
+Do not invent contact information or social media URLs.
+
+---
+
+## 5. HOMEPAGE CONTENT
+
+### SEO Page Title
+
+Code Mux | Learn Coding, Build Projects & Prepare for Jobs
+
+### Meta Description
+
+Learn coding, data analytics and in-demand tech skills with Code Mux. Build practical projects, learn with mentors and prepare for technical interviews.
+
+### Hero Section
+
+Eyebrow text:
+PRACTICAL TECH EDUCATION FOR YOUR CAREER
+
+Main headline:
+Learn to Code. Build Your Future.
+
+Supporting text:
+Master in-demand technology skills, work on real-world projects, learn from mentors and prepare for your next career opportunity with Code Mux.
+
+Primary CTA:
+Explore Courses
+
+Secondary CTA:
+Join Code Mux
+
+Supporting highlights:
+- Practical, project-based learning
+- Structured technical training
+- Mentor guidance
+- Career and interview preparation
+
+Do not display unsupported placement guarantees or fabricated student counts.
+
+### Section 2: What You Can Learn
+
+Heading:
+Build Skills That Move Your Career Forward
+
+Display four course category cards:
+
+1. Full-Stack Web Development
+   Learn HTML, CSS, JavaScript, React, Node.js, Express.js and databases.
+
+2. Data Analytics
+   Learn Excel, SQL, Python, data visualization and Power BI.
+
+3. Python and AI Fundamentals
+   Learn Python programming, data handling and introductory machine learning.
+
+4. Placement Preparation
+   Practice DSA, aptitude, computer science fundamentals, resumes and interviews.
+
+Each card should contain a short description, learning outcomes and a View Course button.
+
+### Section 3: How Code Mux Works
+
+Heading:
+From Learning to Career Preparation
+
+Steps:
+1. Learn — Follow a structured curriculum.
+2. Practice — Solve exercises and assignments.
+3. Build — Create practical projects for your portfolio.
+4. Improve — Receive mentor feedback and assessments.
+5. Prepare — Practice resumes, aptitude and interviews.
+6. Apply — Explore suitable job opportunities.
+
+### Section 4: Featured Courses
+
+Display course cards containing:
+- Course title
+- Course thumbnail
+- Description
+- Difficulty level
+- Duration
+- Curriculum highlights
+- Delivery format
+- Mentor information, when available
+- Price, if finalized
+- View Details button
+- Enroll Now button
+
+Use demo courses initially and mark them as sample content or Coming Soon until they are available for enrollment.
+
+### Section 5: Why Choose Code Mux?
+
+Heading:
+More Than Just Watching Tutorials
+
+Features:
+- Hands-on learning
+- Structured course roadmaps
+- Practical assignments
+- Project-based evaluation
+- Mentor feedback
+- Career preparation
+- Progress tracking
+- A supportive learning environment
+
+Do not claim that all features are operational until they are implemented.
+
+### Section 6: Project Showcase
+
+Heading:
+Learn by Building
+
+Display sample project categories:
+- Portfolio Website
+- Sales Analytics Dashboard
+- Task Management Application
+- Machine Learning Project
+
+Each project card should have a description, technology stack and optional GitHub or live demo link.
+
+Clearly identify demonstration projects. Do not attribute demo work to real students.
+
+### Section 7: Mentors
+
+Heading:
+Learn with Guidance
+
+Display mentor profiles only when genuine profiles are available.
+
+Each profile may include:
+- Name
+- Professional role
+- Areas of expertise
+- Short biography
+- LinkedIn profile, if provided
+
+Use clearly labeled placeholder profiles during development.
+
+### Section 8: Career and Placements
+
+Heading:
+Prepare for the Opportunities Ahead
+
+Content:
+Code Mux supports students through technical interview preparation, resume reviews, mock interviews, practical projects and access to relevant job opportunities.
+
+Features:
+- Resume building
+- Aptitude and DSA practice
+- Technical mock interviews
+- Job opportunity listings
+- Application tracking
+- Career guidance
+
+CTA:
+Explore Career Support
+
+Include a clear statement that job opportunities depend on eligibility, skills, employer requirements and availability. Placement assistance does not guarantee employment.
+
+### Section 9: Testimonials
+
+Heading:
+Student Experiences
+
+Create a reusable testimonial component, but do not publish fabricated testimonials or ratings.
+
+Hide this section until genuine testimonials are collected with permission.
+
+### Section 10: FAQs
+
+Include:
+- What is Code Mux?
+- Who can join Code Mux?
+- Which courses are available?
+- Are courses online or live?
+- Do I need previous coding experience?
+- Will I work on projects?
+- Will I receive a certificate?
+- Does Code Mux provide placement assistance?
+- Are jobs guaranteed?
+- How can I contact Code Mux?
+
+Answers must reflect the actual services and policies.
+
+### Section 11: Final CTA
+
+Headline:
+Your Tech Journey Starts Here.
+
+Supporting text:
+Build practical skills, complete projects and prepare for new career opportunities with Code Mux.
+
+Buttons:
+Explore Courses
+Create an Account
+
+### Section 12: Footer
+
+Include the logo, a short company description, navigation links, contact details, social links and legal policies.
+
+Use placeholders for missing business details instead of inventing information.
+
+---
+
+## 6. COURSE CATALOG AND COURSE DETAILS
+
+### Course Catalog SEO Title
+
+Online Coding and Technology Courses | Code Mux
+
+### Course Catalog Meta Description
+
+Explore technology courses in web development, Python, data analytics and placement preparation. Compare course content, duration and learning outcomes.
+
+### Course Filters
+
+- Category
+- Skill level
+- Duration
+- Learning format
+- Price
+- Search by course title
+
+### Demo Course 1
+
+Title: Full-Stack Web Development
+
+Category: Web Development
+
+Level: Beginner to Intermediate
+
+Demo Duration: 12–16 weeks
+
+Demo Price: ₹7,999–₹12,999
+
+Curriculum:
+- HTML and CSS
+- JavaScript fundamentals
+- Git and GitHub
+- React
+- Node.js
+- Express.js
+- Database fundamentals
+- REST APIs
+- Authentication fundamentals
+- Deployment
+- Capstone project
+
+Projects:
+- Responsive portfolio website
+- REST API application
+- Full-stack web application
+
+### Demo Course 2
+
+Title: Data Analytics
+
+Category: Data Analytics
+
+Level: Beginner to Intermediate
+
+Demo Duration: 8–12 weeks
+
+Demo Price: ₹5,999–₹9,999
+
+Curriculum:
+- Excel
+- SQL
+- Python
+- Pandas
+- Data cleaning
+- Data visualization
+- Power BI
+- Business analysis
+- Capstone dashboard
+
+### Demo Course 3
+
+Title: Python Programming and AI Fundamentals
+
+Category: Programming and AI
+
+Level: Beginner
+
+Demo Duration: 8–12 weeks
+
+Demo Price: ₹4,999–₹8,999
+
+Curriculum:
+- Python syntax and data structures
+- Functions and modules
+- Object-oriented programming
+- File handling
+- APIs
+- Data processing
+- AI and machine learning fundamentals
+- Practical project
+
+### Demo Course 4
+
+Title: Placement Preparation Program
+
+Category: Career Development
+
+Level: Beginner to Intermediate
+
+Demo Duration: 4–8 weeks
+
+Demo Price: ₹1,999–₹3,999
+
+Curriculum:
+- DSA fundamentals
+- Aptitude
+- Operating systems
+- DBMS and SQL
+- Computer networks
+- Resume preparation
+- Technical interviews
+- HR interviews
+- Mock assessments
+
+All prices and durations are provisional examples and must be editable through the admin dashboard.
+
+---
+
+## 7. LOGIN AND AUTHENTICATION
+
+Create a common authentication system with three roles:
+
+1. Admin
+2. Student
+3. Mentor
+
+### Login Page
+
+SEO title:
+Login to Code Mux | Learning Portal
+
+Page elements:
+- Code Mux logo
+- Welcome back heading
+- Email address
+- Password
+- Show/hide password
+- Remember me, if securely implemented
+- Forgot password
+- Sign In
+- Student registration link
+- Validation and error messages
+- Loading state
+
+A role selector may be shown in a demo environment, but the backend must independently verify permissions.
+
+### Student Registration
+
+Fields:
+- Full name
+- Email
+- Password
+- Confirm password
+- Phone number, optional
+- Education level, optional
+- Area of interest, optional
+- Consent to applicable terms and privacy policy
+
+Verify email where practical. Do not request unnecessary personal information.
+
+### Admin Dashboard
+
+Route: /admin/dashboard
+
+Features:
+- Overview statistics
+- Manage users
+- Manage mentors
+- Manage courses
+- Manage lessons
+- Manage batches
+- Manage enrollments
+- Manage assignments
+- Manage announcements
+- Manage jobs
+- Manage applications
+- Manage prices and course availability
+- Manage public website content
+- View reports
+- View audit logs
+
+Only authorized administrators may access administrative functions.
+
+### Student Dashboard
+
+Route: /student/dashboard
+
+Features:
+- Welcome message
+- Profile settings
+- Enrolled courses
+- Course progress
+- Lesson access
+- Downloadable resources
+- Upcoming assignments
+- Assignment submission
+- Grades and feedback
+- Upcoming sessions
+- Certificates, when eligible
+- Career opportunities
+- Resume management
+- Job applications and their statuses
+- Announcements
+- Help and support
+
+Students must only access their own private records.
+
+### Mentor Dashboard
+
+Route: /mentor/dashboard
+
+Features:
+- Assigned courses
+- Assigned batches
+- Student lists
+- Lesson management
+- Learning resources
+- Assignment creation
+- Submission reviews
+- Grades and feedback
+- Session scheduling
+- Attendance
+- Progress tracking
+- Student questions
+- Notifications
+
+Mentors may only manage resources and records for courses and batches they are authorized to access.
+
+### Authentication Security
+
+- Hash passwords using a suitable password-hashing algorithm.
+- Implement secure authentication and session handling.
+- Enforce authorization on backend API endpoints.
+- Protect against unauthorized record access.
+- Add input validation, rate limiting and security headers.
+- Implement secure password reset.
+- Never expose credentials or secrets in frontend code.
+- Never hardcode production admin passwords.
+- Do not trust frontend-only role checks.
+- Use HTTPS in production.
+
+---
+
+## 8. PLACEMENT MANAGEMENT SYSTEM
+
+Create a dedicated Career and Placements module.
+
+### Job Listing Fields
+
+- Company name
+- Job title
+- Job description
+- Required skills
+- Eligibility criteria
+- Location
+- Employment type
+- Experience requirements
+- Salary range, if verified
+- Application deadline
+- Application URL or internal application form
+- Job status
+
+### Student Application Features
+
+- View available opportunities
+- Check eligibility
+- Upload or select a resume
+- Submit an application
+- View application status
+- Receive announcements
+- Review interview schedules
+- Update permitted profile details
+
+### Application Statuses
+
+- Applied
+- Under Review
+- Shortlisted
+- Interview Scheduled
+- Selected
+- Rejected
+- Withdrawn
+
+### Admin Features
+
+- Create and edit job listings
+- Review applications
+- Update application statuses
+- Schedule interviews
+- Record verified outcomes
+- Export authorized reports
+- Track student readiness and progress
+
+### Placement Rules
+
+Do not publish fabricated job listings or employer partnerships.
+
+Do not guarantee employment unless Code Mux can legally and operationally honor the stated guarantee.
+
+Use appropriate consent before sharing resumes or personal details with employers.
+
+---
+
+## 9. ADMINISTRATIVE DATA MODEL
+
+Use MongoDB with Mongoose.
+
+Recommended collections:
+
+- users
+- courses
+- lessons
+- enrollments
+- batches
+- assignments
+- submissions
+- mentorSessions
+- attendance
+- jobs
+- applications
+- certificates
+- announcements
+- payments
+- supportTickets
+- auditLogs
+
+### User Model
+
+- name
+- email
+- passwordHash
+- role
+- accountStatus
+- profile
+- createdAt
+- updatedAt
+
+### Course Model
+
+- title
+- slug
+- shortDescription
+- fullDescription
+- category
+- level
+- duration
+- price
+- curriculum
+- mentorIds
+- thumbnail
+- publicationStatus
+- createdAt
+- updatedAt
+
+### Enrollment Model
+
+- studentId
+- courseId
+- batchId
+- enrollmentDate
+- paymentStatus
+- enrollmentStatus
+- progress
+
+### Job Application Model
+
+- studentId
+- jobId
+- resumeUrl
+- applicationStatus
+- appliedAt
+- interviewSchedule
+- outcome
+
+Validate all references and enforce access permissions. Store sensitive information securely and only for as long as necessary.
+
+---
+
+## 10. SEO CONFIGURATION
+
+Use descriptive page titles, unique meta descriptions, semantic HTML, canonical URLs, XML sitemaps, robots.txt, optimized images and internal links.
+
+Avoid keyword stuffing. Optimize each page for its own intent.
+
+### Global Website Metadata
+
+Default title:
+Code Mux | Technology Courses and Career Preparation
+
+Default meta description:
+Learn coding, web development, Python and data analytics with Code Mux. Build practical projects, learn with mentors and prepare for technical interviews.
+
+Suggested canonical domain:
+https://www.example.com
+
+Replace the example domain with the real domain before launch.
+
+### Page SEO Metadata
+
+Homepage:
+Title: Code Mux | Learn Coding, Build Projects & Prepare for Jobs
+Description: Learn in-demand tech skills with Code Mux through practical projects, mentor guidance and career preparation.
+
+Courses:
+Title: Technology Courses | Code Mux
+Description: Explore web development, Python, data analytics and placement preparation courses with structured learning and practical projects.
+
+Web Development:
+Title: Full-Stack Web Development Course | Code Mux
+Description: Learn HTML, CSS, JavaScript, React, Node.js and databases through practical full-stack development projects.
+
+Data Analytics:
+Title: Data Analytics Course | Code Mux
+Description: Learn Excel, SQL, Python and Power BI with hands-on analytics projects and dashboard development.
+
+Python:
+Title: Python Programming Course | Code Mux
+Description: Learn Python programming, data structures, APIs and practical project development with Code Mux.
+
+Placement Preparation:
+Title: Placement Preparation and Interview Training | Code Mux
+Description: Prepare for technical interviews with DSA, aptitude, SQL, computer science fundamentals, resume guidance and mock interviews.
+
+About:
+Title: About Code Mux | Our Mission and Approach
+Description: Learn about Code Mux, our approach to practical technology education, mentorship and career preparation.
+
+Contact:
+Title: Contact Code Mux | Course and Training Enquiries
+Description: Contact Code Mux for information about technology courses, mentorship, training programs and career preparation.
+
+Login:
+Title: Login to Code Mux | Learning Portal
+Meta robots: noindex, follow
+
+Student Dashboard:
+Title: Student Dashboard | Code Mux
+Meta robots: noindex, nofollow
+
+Admin Dashboard:
+Title: Admin Dashboard | Code Mux
+Meta robots: noindex, nofollow
+
+Mentor Dashboard:
+Title: Mentor Dashboard | Code Mux
+Meta robots: noindex, nofollow
+
+Private pages must be protected by authentication and authorization, not merely by search engine directives.
+
+### Suggested Keyword Themes
+
+Use these naturally where relevant:
+- coding courses for beginners
+- online programming courses
+- full-stack development course
+- web development training
+- Python programming course
+- data analytics training
+- SQL interview preparation
+- DSA placement preparation
+- technical interview preparation
+- project-based learning
+- IT career preparation
+
+Only target location-specific phrases if Code Mux genuinely serves that market. Do not create fake location pages.
+
+### Technical SEO
+
+- Use one clear H1 per page.
+- Use logical H2 and H3 headings.
+- Use descriptive URLs such as /courses/full-stack-development.
+- Add unique title tags and descriptions.
+- Generate sitemap.xml.
+- Configure robots.txt.
+- Use canonical tags.
+- Optimize image sizes and formats.
+- Add descriptive alt text.
+- Ensure mobile responsiveness.
+- Improve page speed and Core Web Vitals.
+- Use breadcrumbs where useful.
+- Add appropriate structured data for Organization, Course and BreadcrumbList only when eligible and supported by visible page content.
+- Never add fake ratings or review schema.
+- Add Google Search Console after the domain is verified.
+- Set up privacy-conscious analytics and conversion tracking as appropriate.
+
+---
+
+## 11. ADDITIONAL PAGES AND POLICIES
+
+Create the following pages:
+
+- /about
+- /contact
+- /faq
+- /privacy-policy
+- /terms
+- /refund-policy
+- /student-code-of-conduct
+- /career-and-placements
+- /support
+
+### Contact Page
+
+Include:
+- Contact form
+- Name
+- Email
+- Subject
+- Message
+- Consent notice where applicable
+- Submission confirmation
+- Business email placeholder
+- Social media placeholders
+
+Do not invent a business address, phone number or email.
+
+### Privacy and Legal Requirements
+
+Prepare policies that accurately describe the actual business practices.
+
+Cover personal data collection, processing, storage, retention, deletion, cookies, analytics, payments, file uploads and sharing with employers.
+
+Include course cancellation, refund and rescheduling conditions before taking payments.
+
+Have the policies reviewed for applicable Indian privacy, consumer protection, tax and e-commerce requirements.
+
+---
+
+## 12. TECHNOLOGY STACK
+
+Use the following stack:
+
+Frontend:
+- React
+- Vite
+- JavaScript
+- Tailwind CSS
+- React Router
+- Axios or Fetch
+
+Backend:
+- Node.js
+- Express.js
+- REST APIs
+- Authentication middleware
+- Input validation
+- Centralized error handling
+
+Database:
+- MongoDB
+- Mongoose
+
+Supporting tools:
+- Git and GitHub
+- Environment variables
+- Managed database hosting
+- Managed file storage
+- Email service for verification and password resets
+- Payment gateway integration when required
+- Video hosting or embedded lessons
+
+Create a clean, maintainable codebase with reusable components and documented setup instructions.
+
+---
+
+## 13. DEMO DATA
+
+Seed the development environment with clearly labeled demo content:
+
+- 1 demo administrator
+- 2 demo mentors
+- 10 demo students
+- 4 demo courses
+- 2 demo batches
+- Sample lessons and assignments
+- Sample submissions and feedback
+- 5 sample job listings
+- Sample application statuses
+- Sample announcements
+
+Do not use real personal information.
+
+Create demo users through a development-only seed script with secure temporary credentials. Never deploy these accounts or credentials to production.
+
+All demo content must be easy to replace or delete from the admin dashboard.
+
+---
+
+## 14. PERFORMANCE, ACCESSIBILITY AND RESPONSIVENESS
+
+Requirements:
+- Responsive on mobile, tablet and desktop.
+- Accessible forms and navigation.
+- Clear focus indicators and keyboard navigation.
+- Appropriate color contrast.
+- Optimized images.
+- Lazy loading where appropriate.
+- Loading indicators and useful error messages.
+- Empty states for new accounts.
+- Search and filtering on course and job listings.
+- Consistent page layouts.
+- Secure file upload validation.
+- Proper handling of expired sessions.
+- Backup and recovery procedures.
+
+Aim for strong Core Web Vitals and good Lighthouse performance without sacrificing functionality.
+
+---
+
+## 15. DEVELOPMENT PRIORITIES
+
+### Phase 1 — Public MVP
+
+Build:
+- Homepage
+- Course catalog
+- Course details
+- About and contact pages
+- Login and registration
+- Basic admin dashboard
+- Basic student dashboard
+
+### Phase 2 — Learning Platform
+
+Build:
+- Course enrollment
+- Lesson access
+- Progress tracking
+- Assignments
+- Submissions
+- Mentor feedback
+- Batch management
+
+### Phase 3 — Career Platform
+
+Build:
+- Job listings
+- Resume uploads
+- Applications
+- Application status tracking
+- Interview scheduling
+- Placement reporting
+
+### Phase 4 — Business Expansion
+
+Add:
+- Payment gateway
+- Automated emails
+- Certificates
+- College partnerships
+- Corporate training
+- Advanced analytics
+- Additional courses
+
+Prioritize a working, secure MVP instead of trying to build everything at once.
+
+---
+
+## 16. FINAL DELIVERY REQUIREMENTS
+
+Generate a complete working website, not just a static landing page.
+
+Deliver:
+- Organized frontend and backend source code
+- Responsive public pages
+- Secure authentication
+- Role-specific dashboards
+- Database models
+- API routes
+- Authorization middleware
+- Demo data seed script
+- Environment variable example file
+- README with installation and deployment steps
+- Error handling and validation
+- A consistent Code Mux design system
+- Working navigation and forms
+- Basic tests for authentication and access permissions
+
+Do not create non-functional buttons, fake payment confirmations, fabricated placement statistics or non-existent integrations.
+
+Clearly label any incomplete feature as Coming Soon.
+
+First provide a concise implementation plan and project structure, then implement the application in manageable phases. Test each core workflow before proceeding.
+
+The finished result should be a simple, professional, secure and scalable starting point for the Code Mux education and career development business.
