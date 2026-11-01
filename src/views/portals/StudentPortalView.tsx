@@ -23,6 +23,7 @@ import {
   ChevronRight,
   UserCheck,
 } from 'lucide-react';
+import { StudentCertificateSection } from '../../components/certificate/StudentCertificateSection';
 
 export const StudentPortalView: React.FC = () => {
   const {
@@ -42,7 +43,7 @@ export const StudentPortalView: React.FC = () => {
   } = useApp();
 
   // Active navigation tab in User Portal
-  const [activeTab, setActiveTab] = useState<'timetable' | 'attendance' | 'projects' | 'syllabus' | 'ppts' | 'ask'>('timetable');
+  const [activeTab, setActiveTab] = useState<'timetable' | 'attendance' | 'projects' | 'syllabus' | 'ppts' | 'ask' | 'certificates'>('timetable');
 
   // Track filter (defaults to student's enrolled track or Full-Stack)
   const studentTrack = currentUser?.track || currentUser?.interest || 'Full-Stack Web Development';
@@ -234,6 +235,16 @@ export const StudentPortalView: React.FC = () => {
             }`}
           >
             <Send className="w-4 h-4" /> Ask Mentor
+          </button>
+          <button
+            onClick={() => setActiveTab('certificates')}
+            className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+              activeTab === 'certificates'
+                ? 'bg-[#FF6B16] text-white shadow-xs'
+                : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
+            }`}
+          >
+            <Award className="w-4 h-4" /> My Certificates
           </button>
         </div>
 
@@ -856,6 +867,9 @@ export const StudentPortalView: React.FC = () => {
             </form>
           </div>
         )}
+
+        {/* TAB 7: MY CERTIFICATES */}
+        {activeTab === 'certificates' && <StudentCertificateSection />}
 
       </div>
     </div>

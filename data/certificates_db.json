@@ -1,0 +1,162 @@
+{
+  "certificates": [
+    {
+      "id": "cert-1793523868023",
+      "certificate_serial_number": "CMX-2026-DSA-000004",
+      "student_id": "usr-student-4",
+      "course_id": "placement",
+      "instructor_id": "usr-mentor-3",
+      "student_name_snapshot": "Meera Joshi",
+      "course_name_snapshot": "Placement Preparation & Interview Mastery",
+      "instructor_name_snapshot": "Ananya Roy",
+      "course_duration_snapshot": "60 Days",
+      "enrollment_date": "2026-02-25",
+      "completion_date": "2026-04-25",
+      "issue_date": "2026-11-01",
+      "certificate_status": "active",
+      "certificate_pdf_url": "/api/certificates/pdf/CMX-2026-DSA-000004",
+      "template_version": "v1.0-official",
+      "issued_by": "admin@codemux.in",
+      "created_at": "2026-11-01T09:04:28.023Z",
+      "updated_at": "2026-11-01T09:04:28.023Z"
+    },
+    {
+      "id": "cert-000001",
+      "certificate_serial_number": "CMX-2026-MERN-000001",
+      "student_id": "usr-student-1",
+      "course_id": "webdev",
+      "instructor_id": "usr-mentor-1",
+      "student_name_snapshot": "Vinit Sharma",
+      "course_name_snapshot": "Full-Stack Web & Cloud Engineering (React, Node & AWS)",
+      "instructor_name_snapshot": "Priya Sharma",
+      "course_duration_snapshot": "60 Days",
+      "enrollment_date": "2026-02-15",
+      "completion_date": "2026-04-15",
+      "issue_date": "2026-04-16",
+      "certificate_status": "active",
+      "certificate_pdf_url": "/api/certificates/pdf/CMX-2026-MERN-000001",
+      "template_version": "v1.0-official",
+      "issued_by": "admin@codemux.in",
+      "created_at": "2026-04-16T10:00:00.000Z",
+      "updated_at": "2026-04-16T10:00:00.000Z"
+    },
+    {
+      "id": "cert-000002",
+      "certificate_serial_number": "CMX-2026-DATA-000002",
+      "student_id": "usr-student-2",
+      "course_id": "data",
+      "instructor_id": "usr-mentor-2",
+      "student_name_snapshot": "Sneha Verma",
+      "course_name_snapshot": "Data Analytics & Global Business Intelligence (Power BI & Tableau)",
+      "instructor_name_snapshot": "Kunal Deshmukh",
+      "course_duration_snapshot": "60 Days",
+      "enrollment_date": "2026-02-18",
+      "completion_date": "2026-04-18",
+      "issue_date": "2026-04-19",
+      "certificate_status": "active",
+      "certificate_pdf_url": "/api/certificates/pdf/CMX-2026-DATA-000002",
+      "template_version": "v1.0-official",
+      "issued_by": "admin@codemux.in",
+      "created_at": "2026-04-19T11:30:00.000Z",
+      "updated_at": "2026-04-19T11:30:00.000Z"
+    },
+    {
+      "id": "cert-000003",
+      "certificate_serial_number": "CMX-2026-JAVA-000003",
+      "student_id": "usr-student-3",
+      "course_id": "java",
+      "instructor_id": "usr-mentor-4",
+      "student_name_snapshot": "Rohan Gupta",
+      "course_name_snapshot": "Java Programming (Beginner)",
+      "instructor_name_snapshot": "Rajesh Shastri",
+      "course_duration_snapshot": "60 Days",
+      "enrollment_date": "2026-01-11",
+      "completion_date": "2026-03-11",
+      "issue_date": "2026-03-12",
+      "certificate_status": "revoked",
+      "revoked_reason": "Administrative policy review: Incomplete final assessment submission and capstone verification failure.",
+      "revoked_at": "2026-03-25T14:20:00.000Z",
+      "revoked_by": "admin@codemux.in",
+      "certificate_pdf_url": "/api/certificates/pdf/CMX-2026-JAVA-000003",
+      "template_version": "v1.0-official",
+      "issued_by": "admin@codemux.in",
+      "created_at": "2026-03-12T09:15:00.000Z",
+      "updated_at": "2026-03-25T14:20:00.000Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "audit-1793523868023",
+      "certificate_serial_number": "CMX-2026-DSA-000004",
+      "action": "ISSUED",
+      "performed_by": "admin@codemux.in",
+      "timestamp": "2026-11-01T09:04:28.023Z",
+      "details": "Official certificate issued to Meera Joshi for Placement Preparation & Interview Mastery."
+    },
+    {
+      "id": "audit-001",
+      "certificate_serial_number": "CMX-2026-MERN-000001",
+      "action": "ISSUED",
+      "performed_by": "admin@codemux.in",
+      "timestamp": "2026-04-16T10:00:00.000Z",
+      "details": "Official Code Mux certificate generated and issued upon course completion verification."
+    },
+    {
+      "id": "audit-002",
+      "certificate_serial_number": "CMX-2026-DATA-000002",
+      "action": "ISSUED",
+      "performed_by": "admin@codemux.in",
+      "timestamp": "2026-04-19T11:30:00.000Z",
+      "details": "Official Code Mux certificate generated and issued upon course completion verification."
+    },
+    {
+      "id": "audit-003",
+      "certificate_serial_number": "CMX-2026-JAVA-000003",
+      "action": "ISSUED",
+      "performed_by": "admin@codemux.in",
+      "timestamp": "2026-03-12T09:15:00.000Z",
+      "details": "Initial certificate generated."
+    },
+    {
+      "id": "audit-004",
+      "certificate_serial_number": "CMX-2026-JAVA-000003",
+      "action": "REVOKED",
+      "performed_by": "admin@codemux.in",
+      "timestamp": "2026-03-25T14:20:00.000Z",
+      "details": "Certificate revoked by authorized administrator.",
+      "reason": "Administrative policy review: Incomplete final assessment submission and capstone verification failure."
+    }
+  ],
+  "emailLogs": [
+    {
+      "id": "email-1793523868023",
+      "certificate_serial_number": "CMX-2026-DSA-000004",
+      "recipient_email": "meera.student@codemux.in",
+      "recipient_name": "Meera Joshi",
+      "subject": "Congratulations! Your Code Mux Certificate Is Ready",
+      "sent_at": "2026-11-01T09:04:28.023Z",
+      "status": "delivered"
+    },
+    {
+      "id": "email-001",
+      "certificate_serial_number": "CMX-2026-MERN-000001",
+      "recipient_email": "xyz@gmail.com",
+      "recipient_name": "Vinit Sharma",
+      "subject": "Congratulations! Your Code Mux Certificate Is Ready",
+      "sent_at": "2026-04-16T10:01:00.000Z",
+      "status": "delivered"
+    },
+    {
+      "id": "email-002",
+      "certificate_serial_number": "CMX-2026-DATA-000002",
+      "recipient_email": "sneha.student@codemux.in",
+      "recipient_name": "Sneha Verma",
+      "subject": "Congratulations! Your Code Mux Certificate Is Ready",
+      "sent_at": "2026-04-19T11:31:00.000Z",
+      "status": "delivered"
+    }
+  ],
+  "lastSequenceByYear": {
+    "2026": 3
+  }
+}

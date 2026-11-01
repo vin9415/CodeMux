@@ -37,6 +37,7 @@ import {
   validateEmail,
   validatePhone,
 } from '../../utils/validation';
+import { AdminCertificateSection } from '../../components/certificate/AdminCertificateSection';
 
 export const AdminPortalView: React.FC = () => {
   const {
@@ -76,7 +77,7 @@ export const AdminPortalView: React.FC = () => {
 
   // Active top-level admin tab
   const [adminTab, setAdminTab] = useState<
-    'overview' | 'users' | 'timetable' | 'attendance' | 'projects' | 'syllabus' | 'ppts' | 'leads' | 'broadcast'
+    'overview' | 'users' | 'timetable' | 'attendance' | 'projects' | 'syllabus' | 'ppts' | 'leads' | 'broadcast' | 'certificates'
   >('overview');
 
   // ================= USERS MODAL STATE =================
@@ -328,6 +329,7 @@ export const AdminPortalView: React.FC = () => {
             { id: 'syllabus', label: `Syllabus Editor (${syllabusTracks.length})`, icon: BookOpen },
             { id: 'ppts', label: `PPTs & Slide Decks (${presentationsList.length})`, icon: Presentation },
             { id: 'leads', label: `Waitlist Leads (${earlyAccessList.length})`, icon: GraduationCap },
+            { id: 'certificates', label: 'Certificate Management', icon: Award },
             { id: 'broadcast', label: 'Announcements & Logs', icon: Send },
           ].map((tab) => {
             const Icon = tab.icon;
@@ -1579,6 +1581,9 @@ export const AdminPortalView: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* TAB: CERTIFICATE MANAGEMENT */}
+        {adminTab === 'certificates' && <AdminCertificateSection />}
 
       </div>
     </div>

@@ -150,3 +150,65 @@ export interface PresentationDeck {
   uploadedAt: string;
   description: string;
 }
+
+export type CertificateStatus = 'active' | 'revoked';
+
+export interface CertificateRecord {
+  id: string;
+  certificate_serial_number: string;
+  student_id: string;
+  course_id: string;
+  instructor_id: string;
+  student_name_snapshot: string;
+  course_name_snapshot: string;
+  instructor_name_snapshot: string;
+  course_duration_snapshot: string;
+  enrollment_date: string;
+  completion_date: string;
+  issue_date: string;
+  certificate_status: CertificateStatus;
+  certificate_pdf_url: string;
+  template_version: string;
+  issued_by: string;
+  revoked_reason?: string;
+  revoked_at?: string;
+  revoked_by?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CertificateEligibility {
+  courseId: string;
+  courseName: string;
+  duration: string;
+  instructorName: string;
+  attendanceRate: number;
+  attendancePassed: boolean;
+  projectsSubmitted: number;
+  projectsRequired: number;
+  projectsPassed: boolean;
+  modulesCompleted: number;
+  totalModules: number;
+  status: 'not_eligible' | 'in_progress' | 'eligible' | 'issued' | 'revoked';
+  certificate?: CertificateRecord;
+}
+
+export interface CertificateAuditLog {
+  id: string;
+  certificate_serial_number: string;
+  action: 'ISSUED' | 'REVOKED' | 'REISSUED' | 'VERIFIED';
+  performed_by: string;
+  timestamp: string;
+  details: string;
+  reason?: string;
+}
+
+export interface CertificateEmailLog {
+  id: string;
+  certificate_serial_number: string;
+  recipient_email: string;
+  recipient_name: string;
+  subject: string;
+  sent_at: string;
+  status: 'sent' | 'delivered';
+}

@@ -15,6 +15,7 @@ import { StudentPortalView } from './views/portals/StudentPortalView';
 import { MentorPortalView } from './views/portals/MentorPortalView';
 import { AdminPortalView } from './views/portals/AdminPortalView';
 import { PrivacyProtectionShield } from './components/PrivacyProtectionShield';
+import { GeminiChatbot } from './components/GeminiChatbot';
 import { ShieldAlert } from 'lucide-react';
 import {
   PrivacyPolicyView,
@@ -22,6 +23,7 @@ import {
   RefundPolicyView,
   CodeOfConductView,
 } from './views/PolicyViews';
+import { CertificateVerificationView } from './views/CertificateVerificationView';
 
 const AccessRestrictedView: React.FC<{ requiredRole: string }> = ({ requiredRole }) => {
   const { navigateTo } = useApp();
@@ -86,6 +88,8 @@ const AppContent: React.FC = () => {
         return <RefundPolicyView />;
       case 'conduct':
         return <CodeOfConductView />;
+      case 'verify-certificate':
+        return <CertificateVerificationView />;
       default:
         return <HomeView />;
     }
@@ -103,6 +107,7 @@ const AppContent: React.FC = () => {
       <EarlyAccessModal />
       <ToastContainer />
       <PrivacyProtectionShield />
+      <GeminiChatbot />
     </div>
   );
 };

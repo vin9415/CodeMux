@@ -147,6 +147,14 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
+                  onClick={() => handleLink('verify-certificate')}
+                  className="hover:text-stone-900 transition-colors text-left cursor-pointer font-semibold text-[#FF6B16]"
+                >
+                  Verify Certificate
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => handleLink('faq')}
                   className="hover:text-stone-900 transition-colors text-left cursor-pointer"
                 >

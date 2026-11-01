@@ -11,6 +11,7 @@ export const Navbar: React.FC = () => {
     { label: 'Career Support', page: 'placements' },
     { label: 'About Us', page: 'about' },
     { label: 'Contact', page: 'contact' },
+    { label: 'Verify Certificate', page: 'verify-certificate' },
   ];
 
   const handleNavClick = (page: PageRoute) => {

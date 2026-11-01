@@ -29,7 +29,8 @@ export type PageRoute =
   | 'privacy'
   | 'terms'
   | 'refund'
-  | 'conduct';
+  | 'conduct'
+  | 'verify-certificate';
 
 export interface ToastMessage {
   id: string;

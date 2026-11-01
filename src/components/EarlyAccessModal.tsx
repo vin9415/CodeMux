@@ -141,63 +141,98 @@ export const EarlyAccessModal: React.FC = () => {
               <option value="All Programs">All Programs &amp; Announcements</option>
 
               {hasAge && numericAge < 18 ? (
-                <optgroup label="🌟 Junior Foundation Tracks">
+                <optgroup label="🌟 Junior Foundation & Enrichment Tracks (Ages 5-17)">
                   <option value="Vedic Maths & Speed Mental Arithmetic">
                     Vedic Maths &amp; Speed Mental Arithmetic
                   </option>
-                  <option value="English Mastery: Grammar, Spoken Fluency & Writing">
-                    English Mastery: Grammar, Spoken Fluency &amp; Writing
+                  <option value="Global English: Public Speaking, Debate & Model UN (MUN)">
+                    Global English: Public Speaking, Debate &amp; Model UN
                   </option>
-                  <option value="Hindi Vyakaran, Sahitya & Conversational Fluency">
-                    Hindi Vyakaran, Sahitya &amp; Conversational Fluency
+                  <option value="Hindi & Sanskrit Heritage: Spoken Fluency & Cultural Literature">
+                    Hindi &amp; Sanskrit Heritage Fluency
                   </option>
-                  <option value="Young Coders: Scratch & Creative Python">
-                    Young Coders: Scratch &amp; Creative Python
+                  <option value="Young Coders: MIT Scratch, Game Design & Creative Python">
+                    Young Coders: MIT Scratch &amp; Python
+                  </option>
+                  <option value="Robotics, Micro:bit & STEM Automation for Kids">
+                    Robotics, Micro:bit &amp; STEM Automation
+                  </option>
+                  <option value="International Math Olympiad & Critical Logic Puzzles">
+                    International Math Olympiad &amp; Logic
+                  </option>
+                  <option value="AI for Kids: Prompting, Machine Learning & Creative Computing">
+                    AI for Kids &amp; Creative Computing
+                  </option>
+                  <option value="Digital Fluency, Cyber Safety & Critical Logic">
+                    Digital Fluency &amp; Cyber Safety
                   </option>
                 </optgroup>
               ) : hasAge && numericAge >= 18 ? (
-                <optgroup label="💼 Career & Technical Specializations">
-                  <option value="Full-Stack Web Development">
-                    Full-Stack Web Development
+                <optgroup label="💼 University & Career Specializations (Ages 18+)">
+                  <option value="Full-Stack Web & Cloud Engineering (React, Node & AWS)">
+                    Full-Stack Web &amp; Cloud Engineering (React, Node &amp; AWS)
                   </option>
-                  <option value="Data Analytics & BI">
-                    Data Analytics &amp; BI
+                  <option value="Applied Generative AI, LLMs & Autonomous Agents">
+                    Applied Generative AI &amp; Autonomous Agents
                   </option>
-                  <option value="Python Programming & AI Fundamentals">
-                    Python Programming &amp; AI Fundamentals
+                  <option value="Data Analytics & Global Business Intelligence (Power BI & Tableau)">
+                    Data Analytics &amp; Global BI (Power BI &amp; Tableau)
                   </option>
-                  <option value="Placement Preparation & Interview Mastery">
-                    Placement Preparation &amp; Interview Mastery
+                  <option value="Global Tech Career, LeetCode DSA & Remote Interview Mastery">
+                    Global Tech Career &amp; LeetCode DSA Mastery
+                  </option>
+                  <option value="Cybersecurity & Ethical Defense Fundamentals">
+                    Cybersecurity &amp; Ethical Defense Fundamentals
+                  </option>
+                  <option value="Digital Fluency, Cyber Safety & Critical Logic">
+                    Digital Fluency &amp; Cyber Safety
                   </option>
                 </optgroup>
               ) : (
                 <>
-                  <optgroup label="🌟 Junior Foundation Tracks">
+                  <optgroup label="🌟 Junior Foundation & Enrichment Tracks">
                     <option value="Vedic Maths & Speed Mental Arithmetic">
                       Vedic Maths &amp; Speed Mental Arithmetic
                     </option>
-                    <option value="English Mastery: Grammar, Spoken Fluency & Writing">
-                      English Mastery: Grammar, Spoken Fluency &amp; Writing
+                    <option value="Global English: Public Speaking, Debate & Model UN (MUN)">
+                      Global English: Public Speaking, Debate &amp; Model UN
                     </option>
-                    <option value="Hindi Vyakaran, Sahitya & Conversational Fluency">
-                      Hindi Vyakaran, Sahitya &amp; Conversational Fluency
+                    <option value="Hindi & Sanskrit Heritage: Spoken Fluency & Cultural Literature">
+                      Hindi &amp; Sanskrit Heritage Fluency
                     </option>
-                    <option value="Young Coders: Scratch & Creative Python">
-                      Young Coders: Scratch &amp; Creative Python
+                    <option value="Young Coders: MIT Scratch, Game Design & Creative Python">
+                      Young Coders: MIT Scratch &amp; Python
+                    </option>
+                    <option value="Robotics, Micro:bit & STEM Automation for Kids">
+                      Robotics, Micro:bit &amp; STEM Automation
+                    </option>
+                    <option value="International Math Olympiad & Critical Logic Puzzles">
+                      International Math Olympiad &amp; Logic
+                    </option>
+                    <option value="AI for Kids: Prompting, Machine Learning & Creative Computing">
+                      AI for Kids &amp; Creative Computing
                     </option>
                   </optgroup>
-                  <optgroup label="💼 Career & Technical Specializations">
-                    <option value="Full-Stack Web Development">
-                      Full-Stack Web Development
+                  <optgroup label="💼 University & Career Specializations">
+                    <option value="Full-Stack Web & Cloud Engineering (React, Node & AWS)">
+                      Full-Stack Web &amp; Cloud Engineering
                     </option>
-                    <option value="Data Analytics & BI">
-                      Data Analytics &amp; BI
+                    <option value="Applied Generative AI, LLMs & Autonomous Agents">
+                      Applied Generative AI &amp; Autonomous Agents
                     </option>
-                    <option value="Python Programming & AI Fundamentals">
-                      Python Programming &amp; AI Fundamentals
+                    <option value="Data Analytics & Global Business Intelligence (Power BI & Tableau)">
+                      Data Analytics &amp; Global BI
                     </option>
-                    <option value="Placement Preparation & Interview Mastery">
-                      Placement Preparation &amp; Interview Mastery
+                    <option value="Global Tech Career, LeetCode DSA & Remote Interview Mastery">
+                      Global Tech Career &amp; DSA Mastery
+                    </option>
+                    <option value="Cybersecurity & Ethical Defense Fundamentals">
+                      Cybersecurity &amp; Ethical Defense
+                    </option>
+                  </optgroup>
+                  <optgroup label="🌐 Universal Cognitive Tracks">
+                    <option value="Digital Fluency, Cyber Safety & Critical Logic">
+                      Digital Fluency &amp; Cyber Safety
                     </option>
                   </optgroup>
                 </>
